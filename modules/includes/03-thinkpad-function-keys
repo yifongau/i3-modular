@@ -1,0 +1,16 @@
+# Thinkpad function keys
+
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
+bindsym XF86AudioMicMute exec pactl set-source-mute 0 toggle
+
+bindsym XF86MonBrightnessDown exec brightnessctl --min-val=5 -q set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl -q set 5%+
+bindsym XF86Display exec arandr
+#bindsym XF86WLAN exec // sometimes works out of the box
+
+#bindsym XF86Tools exec // find use
+#bindsym XF86Bluetooth exec // sometimes works out of the box
+#bindsym X86Keyboard // find use
+#bindsym XF86Favorites exec // works out of the box in some applications

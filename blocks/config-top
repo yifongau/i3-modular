@@ -1,0 +1,34 @@
+color=#fdf6e3
+#color=#073642
+
+full_text=|
+align=center
+separator=false
+
+[memory]
+command=./memory
+label=MEM: 
+interval=5
+
+[separator]
+
+[cpu_usage]
+command=./cpu_usage
+interval=5
+LABEL=CPU: 
+
+[separator]
+
+[temperature]
+command=./temperature
+label=TEMP: 
+interval=5
+
+[separator]
+
+[time]
+command=date +%Y-%m-%d\ %T
+interval= 1
+
+[separator]
+

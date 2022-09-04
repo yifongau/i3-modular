@@ -1,0 +1,358 @@
+### GLOBAL VARIABLES ###
+
+set $screenshot-dir $HOME/media/afbeeldingen/schermafdrukken
+
+# Also used by scripts as positional bash parameters.
+set $font_size 12 
+
+set $bg_col #002b36
+set $focus_col #073642
+set $urgent_col #073642
+
+
+### THEMING ###
+
+# Window border thickness 
+set $border_px 2
+default_border pixel $border_px
+default_floating_border pixel $border_px
+
+# Hide border edge when there is only one window on the workspace
+hide_edge_borders smart
+
+# Window title font (also for bar is none is set) 
+font pango:Iosevka Slab Semibold $font_size
+
+# Background color
+exec_always --no-startup-id xsetroot -solid $bg_color
+
+# Window colors
+
+#                       border	backgr.	text	indicator   child_border
+client.focused          #859900 #002b36 #839496 #859900     #859900
+client.focused_inactive #073642 #002b36 #586e75 #002b36	    #073642
+client.unfocused        #073642 #002b36 #586e75 #002b36	    #073642
+client.urgent           #073642 #002b36 #dc322f #002b36	    #073642
+
+# Status bar configuration
+bar {
+
+	position top
+	font pango:Iosevka Slab Semibold, Iosevka Nerd Font $font_size
+        status_command i3blocks -c $HOME/.config/i3/i3-blocks/config-top
+        strip_workspace_numbers yes
+        binding_mode_indicator yes
+        tray_output primary
+        tray_padding 2
+        wheel_up_cmd nop
+	wheel_down_cmd nop
+        mode dock
+	hidden_state hide 
+        modifier none
+ 	colors {
+      	background $bg_color
+      	separator  #073642
+#                               border	backgr.	text	
+      	focused_workspace  	#073642 #073642 #fdf6e3
+      	active_workspace   	#073642 #073642 #839496
+      	inactive_workspace 	#073642 #073642 #839496
+      	urgent_workspace   	#073642 #073642	#dc322f
+        binding_mode		#073642	#073642	#859900
+        	}
+
+}
+
+# Tray icons
+exec_always --no-startup-id $HOME/.config/i3/scripts/tray.sh
+
+
+### BASIC FUNCTIONS ###
+
+# Modifier key
+set $mod Mod4
+
+# Application launcher
+bindsym $mod+space exec $HOME/.config/i3/scripts/rofi-application-menu.sh $font-size
+
+# Lock screen 
+#exec_always --no-startup-id xscreensaver --no-splash
+#bindsym $mod+Shift+x exec xscreensaver-command --activate
+
+# Policykit authentication agent
+exec --no-startup-id lxpolkit
+
+# Power manager
+exec --no-startup-id xfce4-power-manager
+
+# Intelligent tiling
+exec_always $HOME/.config/i3/scripts/autotiling.py
+
+# Print screen 
+bindsym --release Print exec --no-startup-id scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mv $f $screenshot-dir' 
+bindsym --release Shift+Print exec --no-startup-id scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mv $f $screenshot-dir' 
+
+# Disable capslock
+exec_always --no-startup-id setxkbmap -model pc105 -layout us,us -variant ,intl -option grp:caps_toggle
+
+### BASIC APPLICATION SHORTCUTS ###
+
+# Terminal
+bindsym $mod+Return exec xfce4-terminal
+
+# Persistent tmux session
+bindsym $mod+BackSpace exec xfce4-terminal --title="Tmux" -e "$HOME/.config/i3/scripts/tmux-scratch.sh" 
+
+# Terminal file manager
+bindsym $mod+slash exec xfce4-terminal -e ranger
+
+# GUI file manager
+bindsym $mod+Shift+slash exec thunar
+
+### WORKSPACES ###
+
+# Workspace definitions
+set $ws. 0:.
+set $ws1 1:1
+set $ws2 2:2
+set $ws3 3:3
+set $ws4 4:4
+set $ws5 5:5
+set $ws6 6:6
+set $ws7 7:7
+set $ws8 8:8
+set $ws9 9:9
+set $ws0 10:0
+
+# Workspace functions
+bindsym $mod+period workspace $ws.
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
+
+bindsym $mod+Shift+period move container to workspace $ws.
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0
+
+#  Switch and move to previously focused workspace
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Shift+Tab move container to workspace back_and_forth
+
+# Cycle through active workspaces
+bindsym $mod+Prior workspace prev 
+bindsym $mod+Next workspace next
+
+# Disable switching to previously focused workspaces by swithing to currently focused workspace
+workspace_auto_back_and_forth no
+
+### MULTI-MONITOR - MOVING WORKSPACES
+
+bindsym $mod+Control+Shift+h move workspace to output left
+bindsym $mod+Control+Shift+j move workspace to output down
+bindsym $mod+Control+Shift+k move workspace to output up
+bindsym $mod+Control+Shift+l move workspace to output right
+
+bindsym $mod+Control+h focus output left
+bindsym $mod+Control+j focus output down
+bindsym $mod+Control+k focus output up
+bindsym $mod+Control+l focus output right
+
+### WINDOWS ###
+
+# Window functions 
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Toggle orientation split.
+bindsym $mod+q layout toggle split
+
+# Kill focused window.
+bindsym $mod+Shift+q kill
+
+# Fullscreen mode
+bindsym $mod+f fullscreen toggle
+
+# Intelligent window popup in fullscreen mode
+popup_during_fullscreen smart
+### NAMED WORKSPACES ###
+
+# Workspace definitions
+set $ws-insert 20:  vakstudie
+set $ws-delete 22: 韛 taalstudie
+set $ws-home 22:  boeken
+set $ws-end 23:  schrijfstudie
+set $ws-pause 24:  muziek
+
+# Workspace functions
+bindsym $mod+Insert workspace $ws-insert
+bindsym $mod+Delete workspace $ws-delete
+bindsym $mod+Home workspace $ws-home
+bindsym $mod+End workspace $ws-end
+bindsym $mod+Scroll_Lock workspace $ws-scroll
+bindsym $mod+Pause workspace $ws-pause
+
+bindsym $mod+Shift+Insert move container to workspace $ws-insert
+bindsym $mod+Shift+Delete move container to workspace $ws-delete
+bindsym $mod+Shift+Home move container to workspace $ws-home
+bindsym $mod+Shift+End move container to workspace $ws-end
+bindsym $mod+Shift+Scroll_Lock move container to workspace $ws-scroll
+bindsym $mod+Shift+Pause move container to workspace $ws-pause
+### FLOATING & STICKY WINDOWS ###
+
+# Floating window size.
+floating_minimum_size 640 x 360
+floating_maximum_size 1920 x 1080
+
+# Drag windows with mouse
+floating_modifier $mod
+
+# Toggle floating/tiling
+bindsym $mod+Shift+t floating toggle
+
+# Toggle sticky window.
+bindsym $mod+plus sticky toggle
+
+#}}}
+#{{{BINDING MODES - RESIZE WINDOW
+
+bindsym $mod+r mode "resize window"
+
+
+mode "resize window" {
+    
+        bindsym Left resize shrink width 5 px or 5 ppt
+      	bindsym Down resize shrink height 5 px or 5 ppt
+	bindsym Up resize grow height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+
+ 	bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize shrink height 5 px or 5 ppt
+	bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
+
+        bindsym Shift+Left resize shrink width 15 px or 15 ppt 
+      	bindsym Shift+Down resize shrink height 15 px or 15 ppt
+	bindsym Shift+Up resize grow height 15 px or 15 ppt
+        bindsym Shift+Right resize grow width 15 px or 15 ppt
+
+ 	bindsym Shift+h resize shrink width 15 px or 15 ppt 
+        bindsym Shift+j resize shrink height 15 px or 15 ppt
+	bindsym Shift+k resize grow height 15 px or 15 ppt
+        bindsym Shift+l resize grow width 15 px or 15 ppt
+
+
+        bindsym Escape mode "default"
+}
+
+#}}}
+### SCRATCHPAD ###
+
+# Cycle through scratchpad
+bindsym $mod+minus scratchpad show
+
+# Mark window
+bindsym $mod+Shift+minus mode "set mark and move to scratchpad"
+
+# Focus on marked window
+bindsym $mod+dead_grave exec $HOME/.config/i3/scripts/rofi-go-to-mark.sh
+bindsym $mod+dead_acute exec $HOME/.config/i3/scripts/rofi-go-to-mark.sh
+
+# Mark mode
+mode "set mark and move to scratchpad" { 
+
+    bindsym 1 mark 1, move scratchpad, mode "default"
+    bindsym 2 mark 2, move scratchpad, mode "default"
+    bindsym 3 mark 3, move scratchpad, mode "default"
+    bindsym 4 mark 4, move scratchpad, mode "default"
+    bindsym 5 mark 5, move scratchpad, mode "default"
+    bindsym 6 mark 6, move scratchpad, mode "default"
+    bindsym 7 mark 7, move scratchpad, mode "default"
+    bindsym 8 mark 8, move scratchpad, mode "default"
+    bindsym 9 mark 9, move scratchpad, mode "default"
+    bindsym 0 mark 0, move scratchpad, mode "default"
+
+    bindsym a mark a, move scratchpad, mode "default"
+    bindsym b mark b, move scratchpad, mode "default"
+    bindsym c mark c, move scratchpad, mode "default"
+    bindsym d mark d, move scratchpad, mode "default"
+    bindsym e mark e, move scratchpad, mode "default"
+    bindsym f mark f, move scratchpad, mode "default"
+    bindsym g mark g, move scratchpad, mode "default"
+    bindsym h mark h, move scratchpad, mode "default"
+    bindsym i mark i, move scratchpad, mode "default"
+    bindsym j mark j, move scratchpad, mode "default"
+    bindsym k mark k, move scratchpad, mode "default"
+    bindsym l mark l, move scratchpad, mode "default"
+    bindsym m mark m, move scratchpad, mode "default"
+    bindsym n mark n, move scratchpad, mode "default"
+    bindsym o mark o, move scratchpad, mode "default"
+    bindsym p mark p, move scratchpad, mode "default"
+    bindsym q mark q, move scratchpad, mode "default"
+    bindsym r mark r, move scratchpad, mode "default"
+    bindsym s mark s, move scratchpad, mode "default"
+    bindsym t mark t, move scratchpad, mode "default"
+    bindsym u mark u, move scratchpad, mode "default"
+    bindsym v mark v, move scratchpad, mode "default"
+    bindsym w mark w, move scratchpad, mode "default"
+    bindsym x mark x, move scratchpad, mode "default"
+    bindsym y mark y, move scratchpad, mode "default"
+    bindsym z mark z, move scratchpad, mode "default"
+    
+    bindsym Escape mode "default"
+
+}
+
+#}}}
+#{{{APPLICATIONS - WORKSPACE ASSIGNMENTS
+
+for_window [instance="calibre-gui"] move container to workspace $ws-home
+for_window [class="Spotify"] move container to workspace $ws-pause
+
+#}}}
+#{{{APPLICATIONS - ENABLE FLOATING
+
+for_window [class="Gnome-calculator"] floating enable
+for_window [class="solanum"] floating enable
+for_window [class="Anki"] floating enable
+for_window [title="KeePassXC"] floating enable
+for_window [class="Nicotine"] floating enable
+for_window [class="Transmission-gtk"] floating enable
+for_window [title="Tmux"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Soundconverter"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [class="teams-for-linux"] floating enable
+#}}}
