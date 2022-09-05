@@ -4,7 +4,7 @@ Build i3 configuration from modules through a bash script.
 
 ## Installation
 
-Clone the repo into $HOME/.config/ in the following way:
+Navigate to $HOME/.config/ and run the following command:
 `git clone https://github.com/yifongau/i3-modular i3`
 
 ## Usage
