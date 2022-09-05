@@ -24,7 +24,7 @@ hide_edge_borders smart
 font pango:Iosevka Slab Semibold $font_size
 
 # Background color
-exec_always --no-startup-id xsetroot -solid $bg_color
+exec_always --no-startup-id xsetroot -solid $bg_col
 
 # Window colors
 
@@ -39,7 +39,7 @@ bar {
 
 	position top
 	font pango:Iosevka Slab Semibold, Iosevka Nerd Font $font_size
-        status_command i3blocks -c $HOME/.config/i3/i3-blocks/config-top
+        status_command i3blocks -c $HOME/.config/i3/blocks/config-top
         strip_workspace_numbers yes
         binding_mode_indicator yes
         tray_output primary
@@ -50,7 +50,7 @@ bar {
 	hidden_state hide 
         modifier none
  	colors {
-      	background $bg_color
+      	background $bg_col
       	separator  #073642
 #                               border	backgr.	text	
       	focused_workspace  	#073642 #073642 #fdf6e3
@@ -72,7 +72,7 @@ exec_always --no-startup-id $HOME/.config/i3/scripts/tray.sh
 set $mod Mod4
 
 # Application launcher
-bindsym $mod+space exec $HOME/.config/i3/scripts/rofi-application-menu.sh $font-size
+bindsym $mod+space exec $HOME/.config/i3/scripts/rofi-application-menu.sh $font_size
 
 # Lock screen 
 #exec_always --no-startup-id xscreensaver --no-splash
@@ -285,8 +285,8 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus mode "set mark and move to scratchpad"
 
 # Focus on marked window
-bindsym $mod+dead_grave exec $HOME/.config/i3/scripts/rofi-go-to-mark.sh
-bindsym $mod+dead_acute exec $HOME/.config/i3/scripts/rofi-go-to-mark.sh
+bindsym $mod+dead_grave exec $HOME/.config/i3/scripts/rofi-go-to-mark.sh $font_size
+bindsym $mod+dead_acute exec $HOME/.config/i3/scripts/rofi-go-to-mark.sh $font_size
 
 # Mark mode
 mode "set mark and move to scratchpad" { 
