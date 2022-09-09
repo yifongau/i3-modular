@@ -219,12 +219,14 @@ bindsym $mod+Insert workspace $ws-insert
 bindsym $mod+Delete workspace $ws-delete
 bindsym $mod+Home workspace $ws-home
 bindsym $mod+End workspace $ws-end
+bindsym $mod+Scroll_Lock workspace $ws-scroll
 bindsym $mod+Pause workspace $ws-pause
 
 bindsym $mod+Shift+Insert move container to workspace $ws-insert
 bindsym $mod+Shift+Delete move container to workspace $ws-delete
 bindsym $mod+Shift+Home move container to workspace $ws-home
 bindsym $mod+Shift+End move container to workspace $ws-end
+bindsym $mod+Shift+Scroll_Lock move container to workspace $ws-scroll
 bindsym $mod+Shift+Pause move container to workspace $ws-pause
 ### FLOATING & STICKY WINDOWS ###
 

@@ -1,6 +1,6 @@
 # Modular i3wm configuration
 
-Build i3 configuration from modules through a bash script.
+Modularized i3 configuration with bash.
 
 ## Installation
 
@@ -13,20 +13,6 @@ Place desired modules in `./modules/includes` and run the
 `generate-config` script. The rebuild script will write contents of
 `./modules/includes` to a new configuration file. The old
 configuration file will be renamed and stored as backup.
-
-## Scripts
-
-I use the following scripts (placed in `./scripts`):
-
-`tray.sh`: tray icons for wifi, bluetooth and volume, found
-on major.io.
-
-`autotiling.py`: smart tiling function, from 
-github.com/nwg-piotr/autotiling/
-
-`rofi-application-menu.sh`: application menu
-
-`rofi-go-to-mark.sh`: vim-like marks, unknown who wrote it.
 
 ## Dependencies
 
