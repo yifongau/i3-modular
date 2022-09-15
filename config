@@ -1,5 +1,7 @@
 ### GLOBAL VARIABLES ###
 
+set $scrot_output -e 'mv $f /home/yifongau/media/afbeeldingen/schermafdrukken/'
+
 # $font_size is also used by scripts as positional bash parameters.
 set $font_size 12 
 
@@ -86,9 +88,9 @@ exec --no-startup-id xfce4-power-manager
 exec_always $HOME/.config/i3/scripts/autotiling.py
 
 # Print screen 
-bindsym --release Print exec --no-startup-id scrot 'screenshot_%Y%m%d_%H%M%S.png' 
-bindsym --release Shift+Print exec --no-startup-id scrot -u 'screenshot_%Y%m%d_%H%M%S.png' 
-bindsym --release CTRL+Print exec --no-startup-id scrot -s 'screenshot_%Y%m%d_%H%M%S.png' 
+bindsym --release Print exec --no-startup-id scrot 'screenshot_%Y%m%d_%H%M%S.png' $scrot_output
+bindsym --release Shift+Print exec --no-startup-id scrot -u 'screenshot_%Y%m%d_%H%M%S.png' $scrot_output
+bindsym --release CTRL+Print exec --no-startup-id scrot -s 'screenshot_%Y%m%d_%H%M%S.png' $scrot_output
 
 # Disable capslock
 exec_always --no-startup-id setxkbmap -model pc105 -layout us,us -variant ,intl -option grp:caps_toggle
