@@ -1,8 +1,6 @@
 ### GLOBAL VARIABLES ###
 
-set $screenshot-dir $HOME/media/afbeeldingen/schermafdrukken
-
-# Also used by scripts as positional bash parameters.
+# $font_size is also used by scripts as positional bash parameters.
 set $font_size 12 
 
 set $bg_col #002b36
@@ -88,8 +86,9 @@ exec --no-startup-id xfce4-power-manager
 exec_always $HOME/.config/i3/scripts/autotiling.py
 
 # Print screen 
-bindsym --release Print exec --no-startup-id scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mv $f $screenshot-dir' 
-bindsym --release Shift+Print exec --no-startup-id scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mv $f $screenshot-dir' 
+bindsym --release Print exec --no-startup-id scrot 'screenshot_%Y%m%d_%H%M%S.png' 
+bindsym --release Shift+Print exec --no-startup-id scrot -u 'screenshot_%Y%m%d_%H%M%S.png' 
+bindsym --release CTRL+Print exec --no-startup-id scrot -s 'screenshot_%Y%m%d_%H%M%S.png' 
 
 # Disable capslock
 exec_always --no-startup-id setxkbmap -model pc105 -layout us,us -variant ,intl -option grp:caps_toggle
