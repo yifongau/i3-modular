@@ -2,14 +2,13 @@
 
 set $scrot_name 'screenshot_%Y%m%d_%H%M%S.png' 
 set $scrot_dir -e 'mv $f /home/yifongau/media/afbeeldingen/schermafdrukken/'
-
-# $font_size is also used by scripts as positional bash parameters.
 set $font_size 12 
-
 set $bg_col #002b36
-set $focus_col #073642
-set $urgent_col #073642
+### STARTUP ###
 
+exec --no-startup-id autorandr -c
+exec --no-startup-id light-locker --lock-on-suspend 
+exec --no-startup-id lxpolkit
 
 ### THEMING ###
 
@@ -75,14 +74,7 @@ set $mod Mod4
 bindsym $mod+space exec $HOME/.config/i3/scripts/rofi-application-menu.sh $font_size
 
 # Lock screen 
-#exec_always --no-startup-id xscreensaver --no-splash
-#bindsym $mod+Shift+x exec xscreensaver-command --activate
-
-# Policykit authentication agent
-exec --no-startup-id lxpolkit
-
-# Power manager
-exec --no-startup-id xfce4-power-manager
+bindsym $mod+Shift+x exec light-locker-command -l
 
 # Intelligent tiling
 exec_always $HOME/.config/i3/scripts/autotiling.py
@@ -161,8 +153,6 @@ bindsym $mod+Next workspace next
 workspace_auto_back_and_forth no
 
 ### MULTI-MONITOR - MOVING WORKSPACES
-
-exec_always --no-startup-id $HOME/.config/i3/scripts/autorandr.sh
 
 bindsym $mod+Control+Shift+h move workspace to output left
 bindsym $mod+Control+Shift+j move workspace to output down
