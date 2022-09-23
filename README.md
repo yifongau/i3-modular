@@ -22,4 +22,4 @@ Packages: `xsetroot`, `i3-blocks`, `i3-ipc`, `jq`,
 `xscreensaver`, `setxkbmap`, `scrot`, `pasystray`,
 `blueman-applet`, `nm-applet`, `thunar`, `xfce4-terminal`,
 `tmux`, `lxpolkit`, `xfce4-power-manager`, `lm-sensors`,
-`sysstat` 
+`sysstat`, `autorandr`
